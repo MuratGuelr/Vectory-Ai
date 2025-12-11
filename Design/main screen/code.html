@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vectory AI Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec37",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102213",
+                        "surface-dark": "#161e17",
+                        "border-dark": "#28392b",
+                        "text-secondary": "#9db9a1",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #102213; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #28392b; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b543f; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111812] dark:text-white font-display overflow-hidden h-screen w-full flex">
+<!-- Sidebar -->
+<aside class="w-72 h-full flex flex-col justify-between bg-surface-dark border-r border-border-dark shrink-0 transition-all duration-300">
+<div class="flex flex-col p-6 gap-8">
+<!-- Brand -->
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 shadow-lg shadow-primary/20 border border-primary/20" data-alt="Vectory AI Logo abstract green geometric shape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPIzUr4k3xFvpP1jv-43-AohNqthzB5ILGxv3nm-OOdA7WlbxDRCx9XczD3VuF1wKVkO5YntTU9-FGFtauLS63LYE6vRKOVyB-Odv2YNqCUlbe_uIgWsfGPoElUMMQjf2YfTwjLygseddhxwI4F3Av0QRm95-TeFaw-tunf72FLWumR4nbpYHzkKEZJMWVLkEKEhNq7VbE7L83HjdiFJBsREwySvVcRkt9-4-8B0WG0LR6NHqgQDUGr8-bzW9GGs2tzzS1VlT4ZomZ");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold leading-none tracking-tight">Vectory AI</h1>
+<p class="text-text-secondary text-xs font-medium mt-1">v2.4 Beta</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-full bg-border-dark/60 text-white group transition-all duration-200 border border-border-dark shadow-sm" href="#">
+<span class="material-symbols-outlined icon-fill text-primary">home</span>
+<span class="text-sm font-semibold">Home</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full hover:bg-border-dark/40 text-text-secondary hover:text-white transition-all duration-200" href="#">
+<span class="material-symbols-outlined group-hover:text-white">history</span>
+<span class="text-sm font-medium">History</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full hover:bg-border-dark/40 text-text-secondary hover:text-white transition-all duration-200" href="#">
+<span class="material-symbols-outlined group-hover:text-white">credit_card</span>
+<span class="text-sm font-medium">Pricing</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-full hover:bg-border-dark/40 text-text-secondary hover:text-white transition-all duration-200" href="#">
+<span class="material-symbols-outlined group-hover:text-white">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Sidebar Footer -->
+<div class="flex flex-col p-6 gap-4">
+<button class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full h-11 px-4 bg-primary/10 hover:bg-primary/20 border border-primary/20 text-primary text-sm font-bold transition-all">
+<span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+<span>Admin Panel</span>
+</button>
+<button class="flex items-center gap-3 px-4 py-2 text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Log Out</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full relative overflow-hidden bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="h-20 w-full border-b border-border-dark flex items-center justify-between px-8 bg-background-light dark:bg-background-dark z-10">
+<!-- Breadcrumbs or hidden title for mobile could go here -->
+<div class="hidden md:flex text-text-secondary text-sm">
+                Dashboard / <span class="text-white ml-1 font-medium">Upload</span>
+</div>
+<div class="flex items-center gap-6 ml-auto">
+<!-- Credits Badge -->
+<div class="hidden sm:flex items-center gap-2 px-4 py-2 bg-border-dark/50 rounded-full border border-border-dark">
+<span class="material-symbols-outlined text-primary text-[20px] icon-fill">bolt</span>
+<span class="text-sm font-bold text-white tracking-wide">5 Credits Left</span>
+<button class="ml-2 w-5 h-5 flex items-center justify-center rounded-full bg-primary text-background-dark hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[14px] font-bold">add</span>
+</button>
+</div>
+<!-- Notifications -->
+<button class="relative p-2 text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<!-- Profile -->
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-border-dark group-hover:border-primary transition-colors" data-alt="User profile picture of a person smiling" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBuO6TaDO_1RQhhoQU11J2FBLmcE_vszWOEuyaPKrT-GahNAMemENnur-Fnel2q1TOyMXcF7jXWAG4ztBuUL7MudkAdIa5tDTNzTKGfJkH-tr6Lb2gQI9vyLTTl3YHJ89i3daz0nCqMPvzZNzs8fWwaG9lzeJR2k7AGR5ZL6JIChunPZIn20nPG5vEw6Os_urKKR3D6mfhQCYHd9vZAKSLMImHw1sxWC4u69BywrSH6IdOWU_ibk2hGFENIEVvBKcQmKhtIlWH19A_D");'></div>
+<div class="hidden lg:flex flex-col items-start">
+<p class="text-sm font-bold text-white leading-none">Alex Morgan</p>
+<p class="text-xs text-text-secondary mt-1">Free Plan</p>
+</div>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">expand_more</span>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto w-full flex flex-col items-center justify-center p-6 md:p-12 relative">
+<!-- Decorative Gradients -->
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="layout-content-container flex flex-col w-full max-w-[960px] relative z-0">
+<!-- Headline -->
+<div class="text-center mb-10">
+<h1 class="text-white tracking-tight text-3xl md:text-5xl font-extrabold leading-tight mb-4">
+                        Convert Raster to <span class="text-primary">Vector</span> instantly.
+                    </h1>
+<p class="text-text-secondary text-lg max-w-2xl mx-auto">
+                        Drag and drop your images to generate high-quality SVG vectors in seconds.
+                    </p>
+</div>
+<!-- Upload Zone (Empty State) -->
+<div class="w-full">
+<div class="group relative flex flex-col items-center justify-center w-full min-h-[400px] rounded-xl border-2 border-dashed border-border-dark bg-surface-dark/50 hover:bg-surface-dark hover:border-primary transition-all duration-300 ease-out cursor-pointer overflow-hidden">
+<!-- Hover Glow Effect -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="flex flex-col items-center gap-6 z-10 px-6 py-10">
+<!-- Icon Circle -->
+<div class="w-20 h-20 rounded-full bg-background-dark border border-border-dark group-hover:border-primary/50 group-hover:scale-110 flex items-center justify-center shadow-xl transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-text-secondary group-hover:text-primary transition-colors">cloud_upload</span>
+</div>
+<div class="flex flex-col items-center gap-2 text-center">
+<p class="text-white text-xl font-bold leading-tight tracking-tight">
+                                    Drag image here or <span class="text-primary underline decoration-primary/30 underline-offset-4 group-hover:decoration-primary">Click to Browse</span>
+</p>
+<p class="text-text-secondary text-sm font-normal">
+                                    Supports JPG, PNG, WEBP up to 10MB
+                                </p>
+</div>
+<button class="mt-4 flex min-w-[140px] items-center justify-center rounded-full h-11 px-6 bg-primary text-background-dark hover:bg-[#34fd55] hover:shadow-[0_0_20px_rgba(19,236,55,0.4)] text-sm font-bold tracking-wide transition-all transform active:scale-95">
+                                Browse Files
+                            </button>
+</div>
+</div>
+</div>
+<!-- Chips / File Formats -->
+<div class="flex justify-center mt-8 gap-4 flex-wrap">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-border-dark/30 border border-border-dark/50 text-text-secondary text-xs font-medium uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">image</span>
+                        JPG
+                    </div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-border-dark/30 border border-border-dark/50 text-text-secondary text-xs font-medium uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">image</span>
+                        PNG
+                    </div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-border-dark/30 border border-border-dark/50 text-text-secondary text-xs font-medium uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">language</span>
+                        WEBP
+                    </div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

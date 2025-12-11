@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      // credits can only be updated by Admin SDK (backend) or via specific logic if allowed.
+      // Here we deny write to 'credits' by user unless it's a decrement? No, safer to block.
+      allow write: if false; // Only Admin SDK or Cloud Functions should write here mostly.
+      // But for initial creation?
+      // Actually, allow create if uid matches.
+      allow create: if request.auth.uid == userId;
+      allow update: if false; // Prevent user from editing credits.
+    }
+    match /license_keys/{key} {
+      allow read: if request.auth != null; // To check if valid?
+      allow write: if false;
+    }
+  }
+}

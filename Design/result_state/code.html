@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vectory AI Dashboard</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec37",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#101411", /* Deep Zinc/Green tint */
+                        "surface-dark": "#161b17", /* Slightly lighter for sidebars */
+                        "card-dark": "#1c241d", /* Inputs and Cards */
+                        "text-secondary": "#9db9a1",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem", 
+                        "lg": "1rem", 
+                        "xl": "1.5rem", 
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a382e;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b4f40;
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #13ec37;
+            cursor: pointer;
+            margin-top: -8px; 
+            box-shadow: 0 0 10px rgba(19, 236, 55, 0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #2a382e;
+            border-radius: 2px;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        
+        /* Custom Split View Slider Handle simulation */
+        .split-slider-line {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display overflow-hidden h-screen w-screen flex antialiased">
+<!-- LEFT SIDEBAR -->
+<aside class="w-64 h-full bg-surface-dark flex flex-col border-r border-[#2a382e] shrink-0 z-20">
+<!-- Header -->
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-size: 20px;">pentagon</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-tight tracking-wide">Vectory AI</h1>
+<p class="text-text-secondary text-xs font-medium">v1.0.4</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 px-4 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-full hover:bg-[#28392b] group transition-colors" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">home</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium transition-colors">Home</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-full hover:bg-[#28392b] group transition-colors" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">history</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium transition-colors">History</p>
+</a>
+<!-- Active Item Example -->
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-full bg-[#232f25] border border-[#2a382e]">
+<span class="material-symbols-outlined text-white">image</span>
+<p class="text-white text-sm font-medium">Workspace</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-full hover:bg-[#28392b] group transition-colors" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">monetization_on</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium transition-colors">Pricing</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-full hover:bg-[#28392b] group transition-colors" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">settings</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium transition-colors">Settings</p>
+</a>
+<div class="mt-4 pt-4 border-t border-[#2a382e]">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-full hover:bg-[#28392b] group transition-colors" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">admin_panel_settings</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium transition-colors">Admin Panel</p>
+</a>
+</div>
+</nav>
+<!-- Footer -->
+<div class="p-4 flex flex-col gap-4 bg-surface-dark border-t border-[#2a382e]">
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-primary text-[#111812] text-sm font-bold tracking-wide hover:bg-[#3af558] transition-colors shadow-[0_0_15px_rgba(19,236,55,0.2)]">
+                Upgrade Plan
+            </button>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between px-2 py-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">bolt</span>
+<p class="text-white text-sm font-medium">5 Credits</p>
+</div>
+<button class="text-xs text-text-secondary hover:text-white">Buy more</button>
+</div>
+<div class="flex items-center gap-3 px-2 py-2 mt-1 rounded-xl hover:bg-[#28392b] cursor-pointer transition-colors">
+<div class="w-8 h-8 rounded-full bg-cover bg-center border border-[#3b543f]" data-alt="User profile picture of a woman" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbkavag4NZ8a1xrXNpknAOBHKKJKSlBCwsbuzHtqE21XO1-vQ-ZScCif7IjSOehZ3ziY5RaczH5I84uGlOhDUtGcy9rWNVhXMV63HSglulglPzHlrfBwgAT_WCOLnVs9Ee14GuCdfvKajBNtT6nxH_kWFxJj_c1nvDgDxlyAU82gtACHPWWKxWzhf4oylPQOTjjFDQx3tj_MalL4_FQBVNwzUacXASZzK9wrdoqTuR8kMXQXRq5Ww-RhlA2EpsVtncZGSYqD_rFnY6');"></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-white text-sm font-medium truncate">Elara V.</p>
+<p class="text-text-secondary text-xs truncate">Pro Member</p>
+</div>
+<span class="material-symbols-outlined text-text-secondary ml-auto text-sm">expand_more</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CANVAS AREA -->
+<main class="flex-1 flex flex-col relative bg-[#111512] overflow-hidden">
+<!-- Canvas Toolbar (Floating) -->
+<div class="absolute top-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 p-1.5 bg-[#1c241d]/90 backdrop-blur-md border border-[#2a382e] rounded-full shadow-xl">
+<button class="w-9 h-9 flex items-center justify-center rounded-full text-text-secondary hover:text-white hover:bg-[#2a382e] transition-colors" title="Zoom Out">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<span class="text-xs font-medium text-text-secondary w-12 text-center select-none">124%</span>
+<button class="w-9 h-9 flex items-center justify-center rounded-full text-text-secondary hover:text-white hover:bg-[#2a382e] transition-colors" title="Zoom In">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<div class="w-px h-4 bg-[#2a382e] mx-1"></div>
+<button class="px-3 h-9 flex items-center gap-2 rounded-full text-text-secondary hover:text-white hover:bg-[#2a382e] transition-colors" title="Fit to Screen">
+<span class="material-symbols-outlined text-[18px]">fit_screen</span>
+<span class="text-xs font-bold">Fit</span>
+</button>
+</div>
+<!-- Canvas Background with Pattern -->
+<div class="w-full h-full flex items-center justify-center relative overflow-hidden" style="background-image: radial-gradient(#232f25 1px, transparent 1px); background-size: 20px 20px;">
+<!-- Comparison Container -->
+<div class="relative w-[800px] h-[600px] shadow-2xl rounded-lg overflow-hidden border border-[#2a382e] group cursor-col-resize select-none">
+<!-- "Before" Image (Bottom Layer) -->
+<div class="absolute inset-0 bg-white flex items-center justify-center">
+<!-- This simulates the raster image with some blur or noise if we could use CSS filters, but standard image is fine -->
+<img class="w-full h-full object-cover opacity-90" data-alt="Abstract colorful fluid 3D shape raster version" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcw9xG7t27yOg8ZKmbHBkta8pYYXomLKwVyV1bhrnKgKIgoV0Oauw78Zyha9G94JgwIiOx1PLOc8DbXi5NhuF455AQHyOrgR-zsPB_Y8wR5Z8Oz6xWcCwvfSlo1Fl7fa-ch2LIjvltk90_1evqH8RH2BYyaxEaCx7_smusKgtzFyUplYZKvrzcEIyxF1LxUE8pd3F84CmQFGOtv7AYyVvgzpwcvNQ22YsJ3E7q8Qnv_GTAquq-_tDTvgg0zu3CrATqC0yryXURaZkZ"/>
+<div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10">
+<span class="text-xs font-bold text-white tracking-wider uppercase">Original (Raster)</span>
+</div>
+</div>
+<!-- "After" Image (Top Layer - Clipped) -->
+<div class="absolute inset-0 w-[55%] border-r border-primary/50 overflow-hidden bg-white z-10 relative">
+<img class="absolute inset-0 max-w-none w-[800px] h-[600px] object-cover filter contrast-125 saturate-150" data-alt="Abstract colorful fluid 3D shape vectorized version" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGYa6xaWm34V-0xNBaK-2kwEENqR1jm6iaGZ15NeqlLRyw_he13MJKOx0bLxBWfjW_pJNnFdJ9rfvzR9exTy4TlazASqdTAVR0JfIeQJt2U_6q_NsFMYjC1kYklnvG9PRvKL63Qotk1OwnpTdH187Vlqp1eIeN3TyzqNlWbyi0Uc3abWpLzTyN4U45YiYTvP93uukCzfXb9NLsfwrKQQr3b36Z2DpBXrrIVvl2JZvdFF_paKNLyyZkM-hEN6VuBo7BV7DbeaQ3RA4H"/>
+<div class="absolute bottom-4 left-4 bg-primary/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg">
+<span class="text-xs font-bold text-[#111812] tracking-wider uppercase">Vector Result</span>
+</div>
+</div>
+<!-- Slider Handle -->
+<div class="absolute top-0 bottom-0 left-[55%] w-0.5 bg-primary shadow-[0_0_15px_rgba(19,236,55,0.6)] z-20 flex items-center justify-center -ml-[1px]">
+<div class="w-8 h-8 rounded-full bg-primary border-2 border-white shadow-lg flex items-center justify-center cursor-ew-resize hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[#111812] text-[18px]">code</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Help/Status Bar -->
+<div class="absolute bottom-6 right-6 z-30">
+<div class="flex items-center gap-2 px-4 py-2 bg-[#1c241d] border border-[#2a382e] rounded-full shadow-lg">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-medium text-text-secondary">Processing complete (0.8s)</span>
+</div>
+</div>
+</main>
+<!-- RIGHT SIDEBAR (TOOLBOX) -->
+<aside class="w-80 h-full bg-surface-dark border-l border-[#2a382e] flex flex-col shrink-0 z-20 overflow-y-auto">
+<!-- Header Image Area -->
+<div class="relative h-48 w-full shrink-0">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Close up of abstract colorful lines representing vector paths" style="background-image: linear-gradient(180deg, rgba(22,27,23,0) 0%, #161b17 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6HxjYhJIjyWG5ZDWHY4hqV6dC4uI0lDMIwLszAzPYzvm2JaUbox1aTpjJusnYCrCp5ebaFb3Ivgm5Htudi9Jn7eDEn9xU0r310pWwD7HD-jGuVLbz2DQ8Hxn2_HwaSCtpweaPzQ_Jp1cbqP-tmoyKgWcHPEezHq-emFoJgCue0d5pGTCYRpEevtrMlGFlvf1N5VH4ybjRSK2N8uPp3O12gdRvjH10tFvOunQrf7sfO6bBgrp9P_4kJs4NHdLsdw_9W9qnIvukIPLg');">
+</div>
+<div class="absolute bottom-0 left-0 w-full p-6">
+<h2 class="text-2xl font-bold text-white tracking-tight">Vector Settings</h2>
+<p class="text-text-secondary text-sm mt-1">Adjust parameters to refine output</p>
+</div>
+</div>
+<!-- Scrollable Settings -->
+<div class="flex-1 p-6 flex flex-col gap-6 overflow-y-auto pb-32">
+<!-- Mode Selection -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-white uppercase tracking-wider text-[11px]">Vectorization Mode</label>
+<div class="relative">
+<select class="w-full appearance-none bg-card-dark border border-[#3b543f] text-white text-sm rounded-xl px-4 py-3 pr-10 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all cursor-pointer">
+<option value="color">Full Color Mode</option>
+<option value="bw">Black &amp; White</option>
+<option value="outline">Outline Only</option>
+</select>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Detail Level Slider -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<label class="text-sm font-bold text-white uppercase tracking-wider text-[11px]">Detail Level</label>
+<span class="text-xs font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">High</span>
+</div>
+<div class="px-1">
+<input class="w-full h-2 bg-card-dark rounded-lg appearance-none cursor-pointer" max="100" min="1" type="range" value="75"/>
+</div>
+<div class="flex justify-between text-[10px] text-text-secondary font-medium uppercase tracking-wider">
+<span>Low</span>
+<span>High</span>
+</div>
+</div>
+<hr class="border-[#2a382e]"/>
+<!-- Path Settings -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-white uppercase tracking-wider text-[11px] mb-1">Path Optimization</label>
+<!-- Toggle Item 1 -->
+<label class="flex items-center justify-between p-3 bg-card-dark rounded-xl border border-transparent hover:border-[#3b543f] cursor-pointer transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors text-xl">layers</span>
+<span class="text-sm font-medium text-white">Stack Layers</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-[#2a382e] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+<!-- Toggle Item 2 -->
+<label class="flex items-center justify-between p-3 bg-card-dark rounded-xl border border-transparent hover:border-[#3b543f] cursor-pointer transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors text-xl">grid_off</span>
+<span class="text-sm font-medium text-white">Remove Background</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-[#2a382e] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+<!-- Palette Preview -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center mb-1">
+<label class="text-sm font-bold text-white uppercase tracking-wider text-[11px]">Detected Colors</label>
+<button class="text-[10px] text-text-secondary hover:text-white underline">Edit</button>
+</div>
+<div class="flex gap-2 flex-wrap">
+<div class="w-8 h-8 rounded-full bg-[#FF5733] border border-white/10 shadow-sm"></div>
+<div class="w-8 h-8 rounded-full bg-[#33FF57] border border-white/10 shadow-sm"></div>
+<div class="w-8 h-8 rounded-full bg-[#3357FF] border border-white/10 shadow-sm"></div>
+<div class="w-8 h-8 rounded-full bg-[#F333FF] border border-white/10 shadow-sm"></div>
+<div class="w-8 h-8 rounded-full border border-dashed border-[#3b543f] flex items-center justify-center text-text-secondary hover:text-white hover:border-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Bar (Sticky) -->
+<div class="p-6 bg-surface-dark border-t border-[#2a382e] absolute bottom-0 w-full backdrop-blur-xl bg-opacity-95">
+<div class="flex flex-col gap-3">
+<div class="flex bg-card-dark p-1 rounded-lg border border-[#3b543f]">
+<button class="flex-1 py-1.5 text-xs font-bold text-[#111812] bg-primary rounded shadow-sm">SVG</button>
+<button class="flex-1 py-1.5 text-xs font-medium text-text-secondary hover:text-white hover:bg-white/5 rounded transition-colors">EPS</button>
+<button class="flex-1 py-1.5 text-xs font-medium text-text-secondary hover:text-white hover:bg-white/5 rounded transition-colors">PDF</button>
+<button class="flex-1 py-1.5 text-xs font-medium text-text-secondary hover:text-white hover:bg-white/5 rounded transition-colors">DXF</button>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-12 px-4 bg-primary text-[#111812] font-bold tracking-wide hover:bg-[#3af558] transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(19,236,55,0.25)] active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px] font-bold">download</span>
+<span>Download Vector</span>
+<span class="bg-[#111812]/10 px-2 py-0.5 rounded text-[10px] font-mono ml-1">1 CREDIT</span>
+</button>
+</div>
+</div>
+</aside>
+</body></html>

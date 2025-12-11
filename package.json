@@ -1,0 +1,67 @@
+{
+  "name": "vectory-ai",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist-electron/main.js",
+  "author": "ConsolAktif",
+  "description": "Vectory AI - Raster to Vector Converter",
+  "scripts": {
+    "dev": "concurrently \"next dev\" \"npm run electron:dev\"",
+    "electron:dev": "wait-on http://localhost:3000 && tsc -p electron && electron .",
+    "electron-dev": "npm run electron:dev",
+    "build": "next build && tsc -p electron && electron-builder",
+    "electron-pack": "npm run build",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "clsx": "^2.1.0",
+    "firebase": "^10.8.0",
+    "framer-motion": "^11.0.0",
+    "imagetracerjs": "^1.2.6",
+    "js-cookie": "^3.0.5",
+    "lucide-react": "^0.469.0",
+    "next": "^14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.22",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^39.2.6",
+    "electron-builder": "^24.9.1",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^16.0.8",
+    "postcss": "^8.5.6",
+    "rimraf": "^5.0.5",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.3.3",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.vectoryai.app",
+    "productName": "Vectory AI",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist-electron/**/*",
+      "out/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.graphics-design"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
